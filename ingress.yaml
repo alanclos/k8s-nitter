@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nitter
+  labels:
+    app: nitter
+spec:
+  tls:
+  - hosts:
+      - t.domain.com
+    secretName: domain-tls
+  rules:
+  - host: t.domain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nitter
+            port:
+              number: 80
+
